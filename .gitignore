@@ -43,3 +43,4 @@ user-interface
 node_modules
 *.lock
 *-lock.json
+flask-rest.sqlite3
