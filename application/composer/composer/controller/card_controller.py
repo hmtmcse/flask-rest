@@ -2,7 +2,7 @@ from application.composer.composer.dto.card_dto import CardCreateDto, CardDetail
 from application.composer.composer.service.card_service import CardService
 from flask import Blueprint
 from pfms.swagger.pfms_swagger_decorator import pfms_create, pfms_details, pfms_pagination_sort_search_list, \
-    pfms_restore, pfms_delete, request_response_list
+    pfms_restore, pfms_delete, request_response_list, pfms_post_form
 
 card_controller = Blueprint("card_controller", __name__, url_prefix="/api/v1/card")
 card_service = CardService()
@@ -20,7 +20,7 @@ def details(id: int):
     return card_service.details(id)
 
 
-@card_controller.route("/update", methods=['POST'])
+@card_controller.route("/update", methods=['PUT'])
 @pfms_create(request_body=CardUpdateDto)
 def update():
     return card_service.update()
@@ -48,3 +48,9 @@ def list():
 @request_response_list(response_obj=CardDropDownList)
 def drop_down_list():
     return card_service.drop_down_list()
+
+
+@card_controller.route("/form-data", methods=['POST'])
+@pfms_post_form(request_body=CardCreateDto)
+def form_data():
+    return card_service.form_data()
