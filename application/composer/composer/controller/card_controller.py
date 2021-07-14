@@ -1,8 +1,9 @@
-from application.composer.composer.dto.card_dto import CardCreateDto, CardDetailsDto, CardUpdateDto, CardDropDownList
+from application.composer.composer.dto.card_dto import CardCreateDto, CardDetailsDto, CardUpdateDto, CardDropDownList, \
+    CardFileUpload, CardFileUploadResponse
 from application.composer.composer.service.card_service import CardService
 from flask import Blueprint
 from pfms.swagger.pfms_swagger_decorator import pfms_create, pfms_details, pfms_pagination_sort_search_list, \
-    pfms_restore, pfms_delete, request_response_list, pfms_post_form
+    pfms_restore, pfms_delete, request_response_list, pfms_post_form, pfms_binary_upload
 
 card_controller = Blueprint("card_controller", __name__, url_prefix="/api/v1/card")
 card_service = CardService()
@@ -54,3 +55,9 @@ def drop_down_list():
 @pfms_post_form(request_body=CardCreateDto)
 def form_data():
     return card_service.form_data()
+
+
+@card_controller.route("/upload-file", methods=['POST'])
+@pfms_binary_upload(request_body=CardFileUpload, response_obj=CardFileUploadResponse)
+def upload_file():
+    return card_service.upload_file()

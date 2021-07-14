@@ -3,6 +3,8 @@ from flask import render_template
 from pf_sqlalchemy.db.orm import database
 from pfms.common.pfms_exception import PfMsException
 from pfms.flask_pf_marshmallow_swagger import PFMarshmallowSwagger
+
+from application.composer.composer.service.card_service import CardService, clean_upload
 from pfrf.pfrf_app_config import PFRFAppConfigInterface
 from pfrf.pfrf_utils import import_from_string, is_url_register
 
@@ -57,4 +59,5 @@ class Bootstrap:
         self._app_bismillah(flask_app)
         self._init_pf_marshmallow_swagger(flask_app)
         self._register_root_url(flask_app)
+        clean_upload()
 

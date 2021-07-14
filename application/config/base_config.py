@@ -11,3 +11,6 @@ class BaseConfiguration(object):
     SECRET_KEY = 'random_secret_key_base'
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_ROOT, 'flask-rest.sqlite3')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    def on_startup(self):
+        pass

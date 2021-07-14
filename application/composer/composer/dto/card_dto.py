@@ -1,3 +1,5 @@
+from pfms.swagger.pfms_swagger_api_spec import FileUpload
+
 from application.composer.composer.data.composer_enum import CardType
 from application.composer.composer.model.card import Card
 from marshmallow import fields
@@ -45,3 +47,12 @@ class CardUpdateDto(CardDetailsDto):
         exclude = update_exclude_append()
 
     id = fields.Integer(required=True, error_messages={"required": "Please enter id"})
+
+
+class CardFileUpload(PfBaseSchema):
+    name = FileUpload(required=True, error_messages={"required": "Please upload file."})
+
+
+class CardFileUploadResponse(PfBaseSchema):
+    path = FileUpload(required=True, error_messages={"required": "Please upload file."})
+
